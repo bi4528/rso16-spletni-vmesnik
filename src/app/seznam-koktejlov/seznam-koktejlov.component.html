@@ -1,0 +1,12 @@
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Instructions</th>
+    <th>Image</th>
+  </tr>
+  <tr *ngFor="let cocktail of cocktails">
+    <td>{{ cocktail.strDrink }}</td>
+    <td>{{ cocktail.strInstructions }}</td>
+    <td><img [src]="cocktail.strDrinkThumb" alt="{{ cocktail.strDrink }}" width="100"></td>
+  </tr>
+</table>
