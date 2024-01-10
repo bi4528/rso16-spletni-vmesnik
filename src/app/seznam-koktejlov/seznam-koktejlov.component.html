@@ -1,31 +1,46 @@
 <h1>My cocktails</h1>
 <h2>Users</h2>
+<div *ngIf="users; else noUsers">
 <ul>
   <li *ngFor="let user of users">
     <a href="#" (click)="selectUser(user); $event.preventDefault()">{{ user }}</a>
   </li>
 </ul>
 <p>Current user: {{ selectedUser }}</p>
-
+</div>
+<ng-template #noUsers>
+  <p *ngIf="errorUserMessage === 'Service not available'">Service not available</p>
+  <p *ngIf="!errorUserMessage">No users found</p>
+</ng-template>
 <h2>Search cocktails</h2>
 <input type="text" [(ngModel)]="searchQuery" placeholder="Enter cocktail name">
 <button (click)="searchCocktails()">Search</button>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Instructions</th>
-    <th>Image</th>
-  </tr>
-  <tr *ngFor="let cocktail of cocktails">
-    <td>{{ cocktail.strDrink }}</td>
-    <td>{{ cocktail.strInstructions }}</td>
-    <td><img [src]="cocktail.strDrinkThumb" alt="{{ cocktail.strDrink }}" width="100"></td>
-  </tr>
-</table>
-
+<div *ngIf="cocktails; else noCocktails">
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>Instructions</th>
+      <th>Image</th>
+      <th>Actions</th>
+    </tr>
+    <tr *ngFor="let cocktail of cocktails">
+      <td>{{ cocktail.strDrink }}</td>
+      <td>{{ cocktail.strInstructions }}</td>
+      <td><img [src]="cocktail.strDrinkThumb" alt="{{ cocktail.strDrink }}" width="100"></td>
+      <td>
+        <button (click)="addToFavourites(cocktail.idDrink)">Add to favourites</button>
+      </td>
+    </tr>
+  </table>
+</div>
+<ng-template #noCocktails>
+  <p *ngIf="errorMessage === 'Service not available'">Service not available</p>
+  <p *ngIf="!errorMessage">No cocktails found</p>
+</ng-template>
+<div *ngIf="users">
 <h2>My favourites</h2>
-
-<ol *ngFor="let usercocktail of usercocktails">
-  <li>{{ usercocktail.name }}</li>
-</ol>
+  <ol *ngFor="let usercocktail of usercocktails">
+    <li>{{ usercocktail.name }}</li>
+  </ol>
+</div>
 

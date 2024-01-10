@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable, of} from "rxjs";
+import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import {Observable, of, throwError} from "rxjs";
 import {Cocktail} from "./cocktail.model";
 import { catchError } from 'rxjs/operators';
 
@@ -13,7 +13,14 @@ export class UsersService {
 
   constructor(private http: HttpClient ) { }
 
-  getUsers(): Observable<string[]> {
-    return this.http.get<string[]>(this.apiUrl)
+  getUsers(): Observable<string[]  | null> {
+    return this.http.get<string[]>(this.apiUrl).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.status === 404) {
+          return of(null); // Za 404 greške vraća null
+        }
+        return throwError(error); // Za sve ostale greške baca grešku
+      })
+    );
   }
 }
