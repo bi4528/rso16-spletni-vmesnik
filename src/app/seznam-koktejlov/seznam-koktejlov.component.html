@@ -1,3 +1,15 @@
+<h1>My cocktails</h1>
+<h2>Users</h2>
+<ul>
+  <li *ngFor="let user of users">
+    <a href="#" (click)="selectUser(user); $event.preventDefault()">{{ user }}</a>
+  </li>
+</ul>
+<p>Current user: {{ selectedUser }}</p>
+
+<h2>Search cocktails</h2>
+<input type="text" [(ngModel)]="searchQuery" placeholder="Enter cocktail name">
+<button (click)="searchCocktails()">Search</button>
 <table>
   <tr>
     <th>Name</th>
@@ -10,3 +22,10 @@
     <td><img [src]="cocktail.strDrinkThumb" alt="{{ cocktail.strDrink }}" width="100"></td>
   </tr>
 </table>
+
+<h2>My favourites</h2>
+
+<ol *ngFor="let usercocktail of usercocktails">
+  <li>{{ usercocktail.name }}</li>
+</ol>
+
