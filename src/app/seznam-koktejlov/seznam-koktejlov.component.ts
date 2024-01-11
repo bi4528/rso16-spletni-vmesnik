@@ -89,7 +89,6 @@ export class SeznamKoktejlovComponent implements OnInit {
         console.log('Cocktail added to favourites', response);
         this.usersService.getUsers().subscribe(data => {
             this.users = data;
-            this.selectedUser = this.users ? this.users[0] : null;
             if (this.selectedUser != null){
               this.usercocktailService.getUsercocktails(this.selectedUser).subscribe(data1 => {
                 this.usercocktails = data1;

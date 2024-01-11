@@ -7,7 +7,7 @@ import {SeznamMetadataRequest} from "./seznam-metada-request.model";
   providedIn: 'root'
 })
 export class AddCocktailService {
-  private apiUrl = 'http://localhost:8080/v1/seznam';
+  private apiUrl = 'http://34.89.140.13/seznam/v1/seznam';
 
   constructor(private http: HttpClient) {}
 

@@ -9,7 +9,7 @@ import {catchError} from "rxjs/operators";
 })
 export class UsercocktailService {
 
-  private apiUrl = 'http://localhost:8080/v1/seznam/user/';
+  private apiUrl = 'http://34.89.140.13/seznam/v1/seznam/user/';
 
   constructor(private http: HttpClient) { }
 
